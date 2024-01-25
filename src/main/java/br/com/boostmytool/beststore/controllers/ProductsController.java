@@ -20,6 +20,7 @@ public class ProductsController {
     @GetMapping({"","/"})
     public String showProductsList(Model model) {
         List<Product> products = productsRepository.findAll();
+        // If order By desc add in findAll(Sort.by(Sort.Direction.DESC, "id));
         model.addAttribute("products", products);
         return "products/index";
     }
