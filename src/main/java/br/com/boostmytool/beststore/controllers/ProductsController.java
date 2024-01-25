@@ -1,6 +1,7 @@
 package br.com.boostmytool.beststore.controllers;
 
 import br.com.boostmytool.beststore.models.Product;
+import br.com.boostmytool.beststore.models.ProductDto;
 import br.com.boostmytool.beststore.services.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,5 +24,12 @@ public class ProductsController {
         // If order By desc add in findAll(Sort.by(Sort.Direction.DESC, "id));
         model.addAttribute("products", products);
         return "products/index";
+    }
+
+    @GetMapping("/create")
+    public String showCreatePage(Model model){
+        ProductDto productDto = new ProductDto();
+        model.addAttribute("productDto", productDto);
+        return "products/CreateProduct";
     }
 }
