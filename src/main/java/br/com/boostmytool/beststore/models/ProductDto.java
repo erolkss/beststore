@@ -21,7 +21,7 @@ public class ProductDto {
     @Size(min = 10, message = "The description should be at least 10 characters")
     @Size(max = 2000, message = "The description cannot exceed 2000 characters")
     private String description;
-    private MultipartFile imageFileName;
+    private MultipartFile imageFile;
 
     public String getName() {
         return name;
@@ -63,11 +63,11 @@ public class ProductDto {
         this.description = description;
     }
 
-    public MultipartFile getImageFileName() {
-        return imageFileName;
+    public MultipartFile getImageFile() {
+        return imageFile;
     }
 
-    public void setImageFileName(MultipartFile imageFileName) {
-        this.imageFileName = imageFileName;
+    public void setImageFileName(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
 }
