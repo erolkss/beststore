@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ProductsController {
     @Autowired
     private ProductsRepository productsRepository;
 
-    @GetMapping({"","/"})
+    @GetMapping({"", "/"})
     public String showProductsList(Model model) {
         List<Product> products = productsRepository.findAll();
         // If order By desc add in findAll(Sort.by(Sort.Direction.DESC, "id));
@@ -27,14 +28,17 @@ public class ProductsController {
     }
 
     @GetMapping("/create")
-    public String showCreatePage(Model model){
+    public String showCreatePage(Model model) {
         ProductDto productDto = new ProductDto();
         model.addAttribute("productDto", productDto);
         return "products/CreateProduct";
     }
 
     @PostMapping("/create")
-    public String createProduct(@Valid @ModelAttribute ProductDto productDto, BindingResult result){
-    return "redirect:/products";
+    public String createProduct(@Valid @ModelAttribute ProductDto productDto, BindingResult result) {
+        if (productDto.getImageFile().isEmpty()){
+            result.addError(new FieldError("productDto", "imageFile", "The image file is required"));
+        }
+        return "redirect:/products";
     }
 }
