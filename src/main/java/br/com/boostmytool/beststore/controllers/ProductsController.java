@@ -5,6 +5,7 @@ import br.com.boostmytool.beststore.models.ProductDto;
 import br.com.boostmytool.beststore.services.ProductsRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,8 +29,8 @@ public class ProductsController {
 
     @GetMapping({"", "/"})
     public String showProductsList(Model model) {
-        List<Product> products = productsRepository.findAll();
-        // If order By desc add in findAll(Sort.by(Sort.Direction.DESC, "id));
+        List<Product> products = productsRepository.findAll(Sort.by(Sort.Direction.DESC, "id") );
+        // If order By desc add in findAll(Sort.by(Sort.Direction.DESC, "id"));
         model.addAttribute("products", products);
         return "products/index";
     }
@@ -81,5 +82,12 @@ public class ProductsController {
         productsRepository.save(product);
 
         return "redirect:/products";
+    }
+
+    @GetMapping("/edit")
+    public String showEditPage(Model model, @RequestParam int id){
+
+        return "products/EditProduct";
+
     }
 }
