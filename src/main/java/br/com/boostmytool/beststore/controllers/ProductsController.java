@@ -92,7 +92,7 @@ public class ProductsController {
             Product product = productsRepository.findById(id).get();
             model.addAttribute("product", product);
 
-            ProductDto productDto = new ProductDto() ;
+            ProductDto productDto = new ProductDto();
             productDto.setName(product.getName());
             productDto.setBrand(product.getBrand());
             productDto.setCategory(product.getCategory());
@@ -111,7 +111,19 @@ public class ProductsController {
     }
 
     @PostMapping("/edit")
-    public String updateProduct(Model model, @RequestParam int id, @Valid @ModelAttribute ProductDto productDto, BindingResult result){
+    public String updateProduct(Model model, @RequestParam int id, @Valid @ModelAttribute ProductDto productDto, BindingResult result) {
+
+        try {
+            Product product = productsRepository.findById(id).get();
+            model.addAttribute("product", product);
+
+            if (result.hasErrors()){
+                return "products/EditProduct";
+            }
+        } catch (Exception exception) {
+            System.out.println("Exception: " + exception.getMessage());
+        }
+
         return "redirect:/products";
     }
 }
