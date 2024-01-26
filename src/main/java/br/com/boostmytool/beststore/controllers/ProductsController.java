@@ -164,7 +164,17 @@ public class ProductsController {
 
         try {
             Product product = productsRepository.findById(id).get();
-        }catch (Exception exception) {
+
+            //delete image product
+            Path imagePath = Paths.get("public/images/" + product.getImageFileName());
+            try {
+                Files.delete(imagePath);
+            } catch (Exception exception) {
+                System.out.println("Exception: " + exception.getMessage());
+            }
+
+            productsRepository.delete(product);
+        } catch (Exception exception) {
             System.out.println("Exception: " + exception.getMessage());
         }
         return "redirect:/products";
