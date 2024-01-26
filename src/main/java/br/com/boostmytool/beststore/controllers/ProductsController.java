@@ -156,5 +156,19 @@ public class ProductsController {
         }
 
         return "redirect:/products";
+
     }
+
+    @GetMapping("/delete")
+    public String deleteProduct(@RequestParam int id) {
+
+        try {
+            Product product = productsRepository.findById(id).get();
+        }catch (Exception exception) {
+            System.out.println("Exception: " + exception.getMessage());
+        }
+        return "redirect:/products";
+
+    }
+
 }
