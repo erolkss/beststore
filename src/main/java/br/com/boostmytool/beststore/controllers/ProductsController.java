@@ -29,7 +29,7 @@ public class ProductsController {
 
     @GetMapping({"", "/"})
     public String showProductsList(Model model) {
-        List<Product> products = productsRepository.findAll(Sort.by(Sort.Direction.DESC, "id") );
+        List<Product> products = productsRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         // If order By desc add in findAll(Sort.by(Sort.Direction.DESC, "id"));
         model.addAttribute("products", products);
         return "products/index";
@@ -76,6 +76,7 @@ public class ProductsController {
         product.setBrand(productDto.getBrand());
         product.setCategory(productDto.getCategory());
         product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
         product.setCreateAt(createAt);
         product.setImageFileName(storageFileName);
 
@@ -85,9 +86,27 @@ public class ProductsController {
     }
 
     @GetMapping("/edit")
-    public String showEditPage(Model model, @RequestParam int id){
+    public String showEditPage(Model model, @RequestParam int id) {
 
-        return "products/EditProduct";
+        try {
+            Product product = productsRepository.findById(id).get();
+            model.addAttribute("product", product);
+
+            ProductDto productDto = new ProductDto() ;
+            productDto.setName(product.getName());
+            productDto.setBrand(product.getBrand());
+            productDto.setCategory(product.getCategory());
+            productDto.setPrice(product.getPrice());
+            productDto.setDescription(product.getDescription());
+
+            model.addAttribute("productDto", productDto);
+
+        } catch (Exception exception) {
+            System.out.println("Exception: " + exception.getMessage());
+            return "redirect:/products";
+        }
+
+        return "products/EditProduct.html";
 
     }
 }
