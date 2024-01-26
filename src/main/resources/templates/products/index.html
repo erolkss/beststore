@@ -19,6 +19,7 @@
             <th scope="col">Brand</th>
             <th scope="col">Category</th>
             <th scope="col">Price</th>
+            <th scope="col">Description</th>
             <th scope="col">Image</th>
             <th scope="col">Create</th>
             <th scope="col">Action</th>
@@ -31,10 +32,12 @@
             <td data-th-text="${product.brand}"></td>
             <td data-th-text="${product.category}"></td>
             <td data-th-text="@{'R$ ' + ${product.price}}"></td>
+            <td data-th-text="${product.description}"></td>
             <td>
                 <img data-th-src="@{'/images/' + ${product.imageFileName}}" alt="..." width="100">
             </td>
             <td data-th-text="${product.createAt.toString().substring(0,10)}"></td>
+
 
             <td style="white-space:nowrap">
                 <a class="btn btn-primary btn-sm"
