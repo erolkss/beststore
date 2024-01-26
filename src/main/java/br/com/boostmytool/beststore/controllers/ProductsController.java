@@ -143,6 +143,12 @@ public class ProductsController {
                 product.setImageFileName(storageFileName);
             }
 
+            product.setName(productDto.getName());
+            product.setBrand(productDto.getBrand());
+            product.setCategory(productDto.getCategory());
+            product.setPrice(productDto.getPrice());
+            product.setDescription(productDto.getDescription());
+
         } catch (Exception exception) {
             System.out.println("Exception: " + exception.getMessage());
         }
