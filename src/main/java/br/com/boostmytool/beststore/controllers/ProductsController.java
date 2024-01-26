@@ -109,4 +109,9 @@ public class ProductsController {
         return "products/EditProduct.html";
 
     }
+
+    @PostMapping("/edit")
+    public String updateProduct(Model model, @RequestParam int id, @Valid @ModelAttribute ProductDto productDto, BindingResult result){
+        return "redirect:/products";
+    }
 }
