@@ -13,7 +13,7 @@
         <div class="col-md-8 mx-auto rounded border p-4 m-4">
             <h2 class="text-center mb-5 text-light">New Product</h2>
 
-            <form method="post" enctype="multipart/form-data" data-th-object="${productDto}">
+            <form method="POST" enctype="multipart/form-data" data-th-object="${productDto}">
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label text-light">Name</label>
                     <div class="col-sm-8">
@@ -69,7 +69,7 @@
                     <div class="col-sm-8">
                         <input class="form-control" type="file" data-th-field="${productDto.imageFile}">
                         <p data-th-if="${#fields.hasErrors('imageFile')}" data-th-errorclass="text-danger"
-                           data-th-errors="${productDto.imageFil}"></p>
+                           data-th-errors="${productDto.imageFile                   }"></p>
                     </div>
                 </div>
                 <div class="row">

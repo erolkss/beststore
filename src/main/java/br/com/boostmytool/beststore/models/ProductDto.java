@@ -23,6 +23,14 @@ public class ProductDto {
     private String description;
     private MultipartFile imageFile;
 
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
+    }
+
     public String getName() {
         return name;
     }
@@ -63,11 +71,4 @@ public class ProductDto {
         this.description = description;
     }
 
-    public MultipartFile getImageFile() {
-        return imageFile;
-    }
-
-    public void setImageFileName(MultipartFile imageFile) {
-        this.imageFile = imageFile;
-    }
 }
