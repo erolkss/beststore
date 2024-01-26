@@ -149,6 +149,8 @@ public class ProductsController {
             product.setPrice(productDto.getPrice());
             product.setDescription(productDto.getDescription());
 
+            productsRepository.save(product);
+
         } catch (Exception exception) {
             System.out.println("Exception: " + exception.getMessage());
         }
