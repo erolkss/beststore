@@ -117,9 +117,32 @@ public class ProductsController {
             Product product = productsRepository.findById(id).get();
             model.addAttribute("product", product);
 
-            if (result.hasErrors()){
+            if (result.hasErrors()) {
                 return "products/EditProduct";
             }
+
+            if (!productDto.getImageFile().isEmpty()) {
+                //delete old image
+                String uploadDir = "public/images";
+                Path oldImagePath = Paths.get(uploadDir + product.getImageFileName());
+
+                try {
+                    Files.delete(oldImagePath);
+                } catch (Exception exception) {
+                    System.out.println("Exception: " + exception.getMessage());
+                }
+
+                //Save new image file
+                MultipartFile image = productDto.getImageFile();
+                Date createAt = new Date();
+                String storageFileName = createAt.getTime() + "_" + image.getOriginalFilename();
+
+                try (InputStream inputStream = image.getInputStream()) {
+                    Files.copy(inputStream, Paths.get(uploadDir + storageFileName), StandardCopyOption.REPLACE_EXISTING);
+                }
+                product.setImageFileName(storageFileName);
+            }
+
         } catch (Exception exception) {
             System.out.println("Exception: " + exception.getMessage());
         }
