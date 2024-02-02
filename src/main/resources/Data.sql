@@ -1,6 +1,6 @@
 SELECT * FROM beststore.products;
 
-INSERT INTO products (
+INSERT INTO beststore.products (
 name, brand, category, price, description, image_file_name, create_at
 )
 VALUES
