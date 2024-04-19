@@ -1,4 +1,4 @@
-# Loja de Eletrônicos
+# Best Store
 
 # Sobre o projeto
 
